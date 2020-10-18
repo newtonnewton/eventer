@@ -1,19 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import 'semantic-ui-css/semantic.min.css';
+import 'react-toastify/dist/ReactToastify.min.css';
 import './app/layout/styles.css';
 import App from './app/layout/App';
 import * as serviceWorker from './serviceWorker';
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { configureStore } from './app/store/configStore';
+import ScrollToTop from './app/layout/ScrollToTop';
 
-
-const rootEl = document.getElementById('root');
-
+const store = configureStore();
 function render(){
   ReactDOM.render(
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>,
-    rootEl
-  )
+  <Provider store = {store}>
+  <BrowserRouter>
+    <ScrollToTop />
+    <App />
+  </BrowserRouter>
+  </Provider>
+  ,
+  document.getElementById('root'))
 }
 
 if(module.hot) {
